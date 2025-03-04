@@ -73,6 +73,16 @@ with col2:
     st.write({"score_mean": cross_val_score_mean, "score_std": cross_val_scores.std()})
 
     st.session_state["previous_score"] = cross_val_score_mean
+   
+    if "history" not in st.session_state:
+        st.session_state["history"] = []
+
+    st.session_state["history"].append(cross_val_score_mean)
+
+    st.subheader("История изменений", divider=True)
+    
+    st.line_chart(st.session_state["history"])
+
 
 st.subheader("Домашнее задание (бонус)", divider=True)
 
